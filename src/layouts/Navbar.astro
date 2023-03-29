@@ -24,6 +24,12 @@ import { Icon } from 'astro-icon'
           <Icon name='mdi:menu' />
         </button>
       </li>
+        <li class='h-6 w-6'>
+        <button id='themeBtn' class='h-full w-full' aria-label='toggle-theme'>
+          <Icon name='mdi:white-balance-sunny' class='hover:text-main-1 dark:hidden' />
+          <Icon name='bi:moon-fill' class='hover:text-main-1 hidden dark:block' />
+        </button>
+      </li>
     </ul>
   </div>
 </nav>
@@ -53,6 +59,15 @@ import { Icon } from 'astro-icon'
 </aside>
 
 <script>
+  document.getElementById('themeBtn').addEventListener('click', () => {
+    if (localStorage.theme === 'light') {
+      localStorage.theme = 'dark'
+      document.documentElement.className = 'dark'
+    } else {
+      localStorage.theme = 'light'
+      document.documentElement.className = 'light'
+    }
+  })
   const mobileMenu = document.getElementById('mobileMenu')
   document.getElementById('menuBtn')?.addEventListener('click', () => {
     if (mobileMenu) {
@@ -65,8 +80,9 @@ import { Icon } from 'astro-icon'
       mobileMenu.classList.remove('-translate-x-0', 'opacity-100')
     }
   })
-  // const links = document.querySelectorAll('li a')
-  // links.forEach((link: HTMLAnchorElement) => {
-  //   if (link.pathname === window.location.pathname) link.classList.add('text-main-1')
-  // })
+  const links = document.querySelectorAll('li a')
+  links.forEach((link: HTMLAnchorElement) => {
+    if (link.pathname === window.location.pathname) link.classList.add('text-main-1')
+  })
 </script>
+
